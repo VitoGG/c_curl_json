@@ -1,21 +1,19 @@
+#include <curl/curl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <curl/curl.h>
 #include <string.h>
+
 #include "json_getter.h"
 
-
 // Função de callback para escrever os dados da resposta em um buffer
-size_t write_callback(void *contents, size_t size, size_t nmemb, void *userp)
-{
+size_t write_callback(void *contents, size_t size, size_t nmemb, void *userp) {
   size_t real_size = size * nmemb;
   char *buffer = (char *)userp;
   strcat(buffer, contents);
   return real_size;
 }
 
-int main(void)
-{
+int main(void) {
   CURL *curl;
   CURLcode response;
 
@@ -23,9 +21,9 @@ int main(void)
 
   curl = curl_easy_init();
 
-  if (curl)
-  {
-    curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:8080/periferico/recuperar-versao");
+  if (curl) {
+    curl_easy_setopt(curl, CURLOPT_URL,
+                     "http://localhost:8080/periferico/recuperar-versao");
 
     char buffer[4096];
     buffer[0] = '\0';
@@ -35,12 +33,9 @@ int main(void)
 
     response = curl_easy_perform(curl);
 
-    if (response != CURLE_OK)
-    {
+    if (response != CURLE_OK) {
       fprintf(stderr, "Request failed: %s\n", curl_easy_strerror(response));
-    }
-    else
-    {
+    } else {
       size_t size = strlen(buffer);
 
       valueGetter versao;
