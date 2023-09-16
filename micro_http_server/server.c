@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 #define PORT 8080
-#define RESPONSE_JSON "{\"versao\": \"2.3.0.beta-1\", \"sucesso\": false}"
+#define RESPONSE_JSON "{\"versao\": \"2.3.0.beta-1\", \"sucesso\": false, \"pack\": 2360 }"
 
 void handle_request(int client_socket) {
   char response_header[1024] = "HTTP/1.1 200 OK\r\nContent-Length: ";
