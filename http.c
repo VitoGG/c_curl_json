@@ -9,12 +9,6 @@ typedef struct
   int bool;
 } valueGetter;
 
-typedef struct
-{
-  char versao[4096];
-  int sucesso;
-} JsonResponse;
-
 // Função de callback para escrever os dados da resposta em um buffer
 size_t write_callback(void *contents, size_t size, size_t nmemb, void *userp)
 {
@@ -89,9 +83,6 @@ int main(void)
     else
     {
       size_t size = strlen(buffer);
-
-      JsonResponse response;
-      memset(&response, 0, sizeof(JsonResponse));
 
       valueGetter versao;
 
