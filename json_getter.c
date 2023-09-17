@@ -4,7 +4,7 @@
 
 // Função para extrair a versão do JSON
 int jsonGetAtributeValue(const char *jsonStr, char *attr, valueGetter *getter,
-                         char *type) {
+                         char *type) { 
   memset(getter, 0, sizeof(valueGetter));
 
   char pivot[32];  // pivo para armazenar a string com a "query" da posicao do
@@ -15,7 +15,6 @@ int jsonGetAtributeValue(const char *jsonStr, char *attr, valueGetter *getter,
   const char *attrStart = strstr(jsonStr, pivot);
   if (attrStart) {
     attrStart += strlen(pivot);
-    const char *attrEnd = strchr(attrStart, '\"');
 
     // Caso o tipo especificado seja um string
     if (strncmp(type, "string", 6) == 0) {
@@ -31,15 +30,25 @@ int jsonGetAtributeValue(const char *jsonStr, char *attr, valueGetter *getter,
         return 1;
       }
       return 0;
-    }
-    // caso o tipo seja um booleano
-    else if (strncmp(type, "bool", 4) == 0) {
+    } else if (strncmp(type, "bool", 4) == 0) {
       if (strncmp(attrStart, "true", 4) == 0) {
         getter->booli = 1;
       } else {
         getter->booli = 0;
       }
       return 1;
+    } else if (strncmp(type, "num", 3) == 0) { 
+      const char *attrEnd = strchr(attrStart, '}');
+      
+      size_t len = attrEnd - (attrStart + 1);
+      char num[len + 1];
+
+      strncpy(num, attrStart + 1, len);
+      num[len] = '\0';
+
+      if (num) {
+        getter->num = atoi(num);
+      }
     }
   }
 

@@ -5,6 +5,7 @@
 typedef struct {
   char str[4096];
   int booli;
+  int num;
 } valueGetter;
 
 // Função para extrair a versão do JSON

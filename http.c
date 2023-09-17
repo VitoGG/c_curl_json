@@ -39,15 +39,18 @@ int main(void) {
       size_t size = strlen(buffer);
 
       valueGetter versao;
-
       jsonGetAtributeValue(buffer, "versao", &versao, "string");
-      printf("versao: %s\n", versao.str);
+      printf("Versão >>> %s\n", versao.str);
 
       valueGetter sucesso;
-
       jsonGetAtributeValue(buffer, "sucesso", &sucesso, "bool");
-      printf("SUcesso>>>>>>>> %d\n", sucesso.booli);
+      printf("Sucesso >>> %d\n", sucesso.booli);
 
+      valueGetter pack;
+      jsonGetAtributeValue(buffer, "pack", &pack, "num");
+      printf("Pack >>> %d\n", pack.num);
+
+      // Resposta completa
       printf("RESPOSTA >>>>%s\n", buffer);
       printf("LENGTH: %zu\n", size);
     }
