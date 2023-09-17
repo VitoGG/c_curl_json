@@ -13,7 +13,6 @@ int jsonGetAtributeValue(const char *jsonStr, char *attr, valueGetter *getter,
           "\"%s\":", attr);  //  armazena a string ("\"{atributo fodase}\:"")
 
   const char *attrStart = strstr(jsonStr, pivot);
-  printf("tipo: %s\n", attrStart);
   if (attrStart) {
     attrStart += strlen(pivot);
 
